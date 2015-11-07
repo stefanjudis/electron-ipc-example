@@ -1,0 +1,23 @@
+{
+  "name": "electron-ipc-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stefanjudis/electron-ipc-example.git"
+  },
+  "author": "Stefan Judis <stefanjudis@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stefanjudis/electron-ipc-example/issues"
+  },
+  "homepage": "https://github.com/stefanjudis/electron-ipc-example#readme",
+  "dependencies": {
+    "electron-prebuilt": "^0.34.3"
+  }
+}
