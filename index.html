@@ -9,11 +9,6 @@
     We are using Node.js <script>document.write(process.version)</script>
     and Electron <script>document.write(process.versions['electron'])</script>.
 
-    <form id="syncForm">
-      <button>Trigger sync IPC action</button>
-      <p class="msg"></p>
-    </form>
-
     <form id="asyncForm">
       <button>Trigger async IPC action</button>
       <p class="msg"></p>
@@ -21,27 +16,17 @@
 
 
     <script>
-      var ipc = require( 'ipc' );
-
-      // var syncForm  = document.getElementById( 'syncForm' );
-      // var syncMsg   = syncForm.querySelector( '.msg' );
+      var ipc       = require( 'ipc' );
       var asyncForm = document.getElementById( 'asyncForm' );
       var asyncMsg  = asyncForm.querySelector( '.msg' );
 
-      // syncForm.addEventListener( 'submit', ( event ) => {
-      //   event.preventDefault();
-
-      //   syncMsg.innerHTML = `${ + new Date()} - ${ipc.sendSync( 'synchronous-message', 'send syncMessage' )}`;
-      // } );
-
-      ipc.on( 'asynchronous-reply', function( msg ) {
-        asyncMsg.innerHTML = `${ + new Date()} - ${msg}`;
+      ipc.on( 'meetup-reply', function( msg ) {
+        asyncMsg.innerHTML = + new Date() + msg;
       } );
 
-      asyncForm.addEventListener( 'submit', ( event ) => {
+      asyncForm.addEventListener( 'submit', function( event ) {
         event.preventDefault();
-
-        ipc.send( 'asynchronous-message', 'send asyncMessage' );
+        ipc.send( 'meetup', 'send asyncMessage' );
       } );
     </script>
   </body>

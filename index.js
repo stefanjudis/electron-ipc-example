@@ -38,20 +38,9 @@ app.on( 'ready', function() {
     mainWindow = null;
   } );
 
-  // ipc.on( 'synchronous-message', function( event, arg ) {
-  //   for ( var i = 0; i < 2000000000; i++ ) {}
-
-  //   event.returnValue = 'Got sync msg!';
-  // } );
-
-  ipc.on( 'asynchronous-message', function( event, arg ) {
+  ipc.on( 'meetup', function( event, arg ) {
     console.log( 'received async msg' );
-    // for ( var i = 0; i < 2000000000; i++ ) {}
-    // event.sender.send( 'asynchronous-reply', 'Got async msg!' );
 
-    setTimeout( () => {
-      for ( var i = 0; i < 2000000000; i++ ) {}
-      event.sender.send( 'asynchronous-reply', 'Got async msg!' );
-    }, 0 );
+    event.sender.send( 'meetup-reply', 'Got async msg!' );
   } );
 } );
