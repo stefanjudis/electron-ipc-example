@@ -1,5 +1,6 @@
 var app           = require( 'app' );  // Module to control application life.
 var BrowserWindow = require( 'browser-window' );  // Module to create native browser window.
+var ipc           = require( 'ipc' );
 
 // Report crashes to our server.
 require( 'crash-reporter' ).start();
@@ -27,7 +28,7 @@ app.on( 'ready', function() {
   mainWindow.loadUrl( 'file://' + __dirname + '/index.html' );
 
   // Open the DevTools.
-  // mainWindow.openDevTools();
+  mainWindow.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on( 'closed', function() {
@@ -35,5 +36,22 @@ app.on( 'ready', function() {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null;
+  } );
+
+  // ipc.on( 'synchronous-message', function( event, arg ) {
+  //   for ( var i = 0; i < 2000000000; i++ ) {}
+
+  //   event.returnValue = 'Got sync msg!';
+  // } );
+
+  ipc.on( 'asynchronous-message', function( event, arg ) {
+    console.log( 'received async msg' );
+    // for ( var i = 0; i < 2000000000; i++ ) {}
+    // event.sender.send( 'asynchronous-reply', 'Got async msg!' );
+
+    setTimeout( () => {
+      for ( var i = 0; i < 2000000000; i++ ) {}
+      event.sender.send( 'asynchronous-reply', 'Got async msg!' );
+    }, 0 );
   } );
 } );
